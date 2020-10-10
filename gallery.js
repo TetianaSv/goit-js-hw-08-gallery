@@ -27,13 +27,44 @@ function createImagesGallery(images) {
     .join("");
 }
 
+function stopDefAction(evt) {
+  evt.preventDefault();
+}
+
 function onGalleryContainerClick(evt) {
   if (evt.target.nodeName !== "IMG") {
     return;
+  } else {
+    document.querySelector(".lightbox.js-lightbox").classList.add("is-open");
+    const lightboxButtonEl = document.querySelector(".lightbox__button");
+    const lightboxImageEl = document.querySelector(".lightbox__image");
+    lightboxImageEl.src = evt.target.dataset.source;
+    lightboxImageEl.alt = evt.target.alt;
+    lightboxButtonEl.addEventListener("click", closeModal);
+    document
+      .querySelector(".lightbox__overlay")
+      .addEventListener("click", closeModal);
+    window.addEventListener("keydown", onEscKeyPress);
   }
-  evt.preventDefault();
+  stopDefAction(evt);
   console.log(evt.target.dataset.source);
 }
-function stopDefAction(evt) {
-  evt.preventDefault();
+
+function closeModal() {
+  document.querySelector(".lightbox.js-lightbox").classList.remove("is-open");
+}
+
+function onBackdropClick(event) {
+  if (event.currentTarget === event.target) {
+    closeModal();
+  }
+}
+
+function onEscKeyPress(event) {
+  const ESC_KEY_CODE = "Escape";
+  const isEscKey = event.code === ESC_KEY_CODE;
+
+  if (isEscKey) {
+    closeModal();
+  }
 }
