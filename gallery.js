@@ -30,14 +30,15 @@ function createImagesGallery(images) {
 function stopDefAction(evt) {
   evt.preventDefault();
 }
+const modalWindowEl = document.querySelector(".lightbox.js-lightbox");
+const lightboxButtonEl = document.querySelector(".lightbox__button");
+const lightboxImageEl = document.querySelector(".lightbox__image");
 
 function onGalleryContainerClick(evt) {
   if (evt.target.nodeName !== "IMG") {
     return;
   } else {
-    document.querySelector(".lightbox.js-lightbox").classList.add("is-open");
-    const lightboxButtonEl = document.querySelector(".lightbox__button");
-    const lightboxImageEl = document.querySelector(".lightbox__image");
+    modalWindowEl.classList.add("is-open");
     lightboxImageEl.src = evt.target.dataset.source;
     lightboxImageEl.alt = evt.target.alt;
     lightboxButtonEl.addEventListener("click", closeModal);
@@ -51,7 +52,7 @@ function onGalleryContainerClick(evt) {
 }
 
 function closeModal() {
-  document.querySelector(".lightbox.js-lightbox").classList.remove("is-open");
+  modalWindowEl.classList.remove("is-open");
 }
 
 function onBackdropClick(event) {
