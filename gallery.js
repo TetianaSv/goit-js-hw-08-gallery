@@ -53,6 +53,7 @@ function onGalleryContainerClick(evt) {
 
 function closeModal() {
   modalWindowEl.classList.remove("is-open");
+  lightboxImageEl.src = "";
 }
 
 function onBackdropClick(event) {
